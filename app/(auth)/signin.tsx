@@ -4,7 +4,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 const SignIn = () => {
   return (
     <SafeAreaView>
-      <Text>SignIn</Text>
+      <Text>SignIn!</Text>
     </SafeAreaView>
   );
 };
