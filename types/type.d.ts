@@ -33,6 +33,36 @@ declare interface MapProps {
   onMapReady?: () => void;
 }
 
+/// TOOD: Determine what info we'd like to capture
+declare interface Farm {
+  name: string;
+  address: string;
+  lat: number;
+  long: number;
+  fileds: Field[];
+}
+
+declare interface Field {
+  field_number: number;
+}
+
+declare interface Invoice {
+  vendor: string;
+  date: string;
+  bill_to: string;
+  bill_to_lat: number;
+  bill_to_long: number;
+  total_amount: number;
+  lineitems: LineItem[];
+}
+
+declare interface LineItem {
+  unit_price: number;
+  quanitty: number;
+  total_price: number;
+  description: string;
+}
+
 declare interface Ride {
   origin_address: string;
   destination_address: string;
