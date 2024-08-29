@@ -277,7 +277,7 @@ export function Home() {
               </View>
             </>
             <Text className="text-xl font-JakartaBold mt-5 mb-3">
-              Recent Farms
+              Recent Fields
             </Text>
           </>
         )}
