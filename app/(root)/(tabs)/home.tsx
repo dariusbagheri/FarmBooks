@@ -228,7 +228,6 @@ export function Home() {
   }, []);
 
   return (
-    // <Map />
     <SafeAreaView className="bg-general-500">
       <FlatList
         data={mockFarms?.slice(0, 5)}

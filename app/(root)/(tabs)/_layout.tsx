@@ -32,21 +32,27 @@ export default function Layout() {
       initialRouteName="index"
       screenOptions={{
         tabBarActiveTintColor: "white",
-        tabBarInactiveTintColor: "white",
-        tabBarShowLabel: false,
+        tabBarInactiveTintColor: "gray",
+        tabBarShowLabel: true,
         tabBarStyle: {
-          backgroundColor: "#333333",
-          borderRadius: 50,
-          paddingBottom: 0, // ios only
-          overflow: "hidden",
-          marginHorizontal: 20,
-          marginBottom: 20,
-          height: 78,
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          flexDirection: "row",
+          backgroundColor: "#666666",
+          paddingTop: 10,
+          paddingBottom: 15, // ios only
+          // borderRadius: 25,
+          // overflow: "hidden",
+          // marginHorizontal: 20,
+          // marginBottom: 20,
+          // display: "flex",
+          // justifyContent: "space-between",
+          // alignItems: "center",
+          // flexDirection: "row",
           position: "absolute",
+          height: 90,
+          bottom: 0,
+          left: 0,
+          right: 0,
+          borderTopWidth: 1,
+          borderTopColor: "#444444",
         },
       }}
     >
