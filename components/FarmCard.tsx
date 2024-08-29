@@ -11,7 +11,7 @@ const FarmCard = ({
   farm: Farm;
 }) => {
   const onPress = () => {
-    router.push("/(auth)/auth");
+    router.push("/(root)/(tabs)/chat");
   };
 
   return (
