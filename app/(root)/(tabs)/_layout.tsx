@@ -30,22 +30,16 @@ export default function Layout() {
   return (
     <Tabs
       initialRouteName="index"
+      backBehavior="initialRoute"
       screenOptions={{
         tabBarActiveTintColor: "white",
         tabBarInactiveTintColor: "gray",
+        tabBarHideOnKeyboard: true,
         tabBarShowLabel: true,
         tabBarStyle: {
           backgroundColor: "#666666",
           paddingTop: 10,
           paddingBottom: 15, // ios only
-          // borderRadius: 25,
-          // overflow: "hidden",
-          // marginHorizontal: 20,
-          // marginBottom: 20,
-          // display: "flex",
-          // justifyContent: "space-between",
-          // alignItems: "center",
-          // flexDirection: "row",
           position: "absolute",
           height: 90,
           bottom: 0,

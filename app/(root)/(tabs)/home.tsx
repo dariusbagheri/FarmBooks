@@ -9,13 +9,14 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-import * as Location from "expo-location";
 import { router } from "expo-router";
+import * as Location from "expo-location";
 import { icons, images } from "@/constants";
 import FarmCard from "@/components/FarmCard";
 import Map from "@/components/Map";
 import { useEffect, useState } from "react";
 import { useLocationStore } from "@/store";
+import GoogleTextInput from "@/components/GoogleTextInput";
 
 const recentInvoices = [
   {
@@ -202,6 +203,15 @@ export function Home() {
     router.replace("/(auth)/signin");
   };
 
+  const handleDestinationPress = (location: {
+    latitude: number;
+    longitude: number;
+    address: string;
+  }) => {
+    setDestinationLocation(location);
+    router.push("/(root)/farm");
+  };
+
   useEffect(() => {
     const requestLocation = async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
@@ -267,6 +277,13 @@ export function Home() {
                 <Image source={icons.out} className="w-4 h-4" />
               </TouchableOpacity>
             </View>
+
+            <GoogleTextInput
+              icon={icons.search}
+              containerStyle="bg-white shadow-md shadow-neutral-300"
+              handlePress={handleDestinationPress}
+            />
+
             <>
               <Text className="text-xl font-JakartaBold mt-5 mb-3">
                 Your current location
