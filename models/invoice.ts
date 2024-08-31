@@ -1,7 +1,9 @@
-import Realm, { ObjectSchema } from "realm";
+import Realm, { BSON, ObjectSchema } from "realm";
+
+Realm.setLogLevel("info");
 
 // Define the LineItem schema
-class LineItem extends Realm.Object<LineItem> {
+export class LineItem extends Realm.Object<LineItem> {
   static schema: ObjectSchema = {
     name: "LineItem",
     properties: {
@@ -14,7 +16,7 @@ class LineItem extends Realm.Object<LineItem> {
 }
 
 // Define the Invoice schema
-class Invoice extends Realm.Object<Invoice> {
+export class Invoice extends Realm.Object<Invoice> {
   static schema: ObjectSchema = {
     name: "Invoice",
     properties: {
@@ -31,12 +33,20 @@ class Invoice extends Realm.Object<Invoice> {
   };
 }
 
-// Export the schemas
-export const InvoiceSchema = Invoice.schema;
-export const LineItemSchema = LineItem.schema;
+export class Item extends Realm.Object<Item> {
+  static schema: Realm.ObjectSchema = {
+    name: "Item",
+    primaryKey: "_id",
+    properties: {
+      _id: { type: "objectId", default: () => new BSON.ObjectId() },
+      text: "string",
+      timestamp: "date",
+      synced: "bool",
+    },
+  };
+}
 
 // Create and export a Realm instance with these schemas
-export const realm = new Realm({
-  schema: [InvoiceSchema, LineItemSchema],
-  schemaVersion: 1,
-});
+// export const realm = new Realm({
+//   schema: [InvoiceSchema, LineItemSchema, InputSchema],
+// });
