@@ -1,11 +1,13 @@
-import { View, TextInput, Button, Text } from "react-native";
-import React, { useState, useEffect, useCallback } from "react";
+import { View, Text, FlatList } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import React, { useState, useEffect, useCallback } from "react";
 
 import { BSON } from "realm";
 import { useRealm, useQuery } from "@realm/react";
 
 import { Item } from "@/models/invoice";
+import CustomButton from "@/components/CustomButton";
+import InputField from "@/components/InputField";
 
 const Rides = () => {
   // const user = useUser();
@@ -16,7 +18,7 @@ const Rides = () => {
   const saveInput = () => {
     if (realm) {
       realm.write(() => {
-        realm.create("Input", {
+        realm.create("Item", {
           _id: new BSON.ObjectId(),
           text: inputText,
           timestamp: new Date(),
@@ -30,17 +32,15 @@ const Rides = () => {
 
   return (
     <SafeAreaView>
-      <Text className="mt-10">
+      <Text className="text-xl mt-10">
         Network status: {!realm.isClosed ? "Connected" : "Disconnected"}
       </Text>
-      <TextInput
-        value={inputText}
+      <InputField
+        label="Input Item:"
+        placeholder="Enter item name"
         onChangeText={setInputText}
-        placeholder="Enter text"
-        className="flex w-30 h-10 border mt-10"
-        numberOfLines={1}
       />
-      <Button title="Save" onPress={saveInput} />
+      <CustomButton title="Save" onPress={saveInput} className="mt-2" />
     </SafeAreaView>
   );
 };

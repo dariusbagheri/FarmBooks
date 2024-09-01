@@ -5,6 +5,15 @@ import * as SplashScreen from "expo-splash-screen";
 
 import { tokenCache } from "@/lib/auth";
 import { ClerkProvider, ClerkLoaded } from "@clerk/clerk-expo";
+import {
+  AppProvider,
+  RealmProvider,
+  UserProvider,
+  useAuth,
+} from "@realm/react";
+import { Item } from "@/models/invoice";
+import { Pressable, View, Text } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY!;
 
@@ -41,13 +50,32 @@ export default function RootLayout() {
   return (
     <ClerkProvider publishableKey={publishableKey} tokenCache={tokenCache}>
       <ClerkLoaded>
-        <Stack>
-          <Stack.Screen name="index" options={{ headerShown: false }} />
-          <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-          <Stack.Screen name="(root)" options={{ headerShown: false }} />
-          <Stack.Screen name="+not-found" />
-        </Stack>
+        <AppProvider id="fb_sync_service-acgyahn">
+          <UserProvider fallback={LogIn}>
+            <RealmProvider schema={[Item]}>
+              <Stack>
+                <Stack.Screen name="index" options={{ headerShown: false }} />
+                <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+                <Stack.Screen name="(root)" options={{ headerShown: false }} />
+                <Stack.Screen name="+not-found" />
+              </Stack>
+            </RealmProvider>
+          </UserProvider>
+        </AppProvider>
       </ClerkLoaded>
     </ClerkProvider>
   );
 }
+
+const LogIn = () => {
+  // Calling `useAuth()` requires AppProvider to be a parent
+  const { logInWithAnonymous, result } = useAuth();
+  return (
+    <SafeAreaView>
+      <Pressable onPress={logInWithAnonymous}>
+        <Text>Log In</Text>
+      </Pressable>
+      {result.error && <Text>{result.error.message}</Text>}
+    </SafeAreaView>
+  );
+};
