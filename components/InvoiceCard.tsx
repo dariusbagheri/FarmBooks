@@ -1,13 +1,14 @@
 import { Invoice } from "@/types/type";
 import React, { useState } from "react";
 import { View, Text, Image } from "react-native";
-import { realm } from "@/models/invoice"; // Adjust this import path as needed
 
 const InvoiceCard = ({
   invoice: { vendor, bill_to, date, lineitems, total_amount },
 }: {
   invoice: Invoice;
 }) => {
+  // Component mount point
+
   return (
     <View className="flex flex-row items-center justify-center bg-white rounted-lg shadow-sm shadow-neutral-300 mb-3">
       <View className="flex flex-row items-center justify-between p-3">

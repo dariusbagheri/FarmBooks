@@ -61,9 +61,9 @@ export default function Layout() {
         }}
       />
       <Tabs.Screen
-        name="rides"
+        name="expenses"
         options={{
-          title: "Rides",
+          title: "Expenses",
           headerShown: false,
           tabBarIcon: ({ focused }) => (
             <TabIcon source={icons.list} focused={focused} />

@@ -1,15 +1,16 @@
+import React, { useState } from "react";
 import { View, Text, FlatList } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import React, { useState, useEffect, useCallback } from "react";
 
 import { BSON } from "realm";
 import { useRealm, useQuery } from "@realm/react";
 
-import { Item } from "@/models/invoice";
+import { Item, LineItem, Invoice } from "@/models/invoice";
 import CustomButton from "@/components/CustomButton";
 import InputField from "@/components/InputField";
+import InvoiceCard from "@/components/InvoiceCard";
 
-const Rides = () => {
+const Expenses = () => {
   // const user = useUser();
   const realm = useRealm();
   const items = useQuery(Item).sorted("_id");
@@ -41,8 +42,18 @@ const Rides = () => {
         onChangeText={setInputText}
       />
       <CustomButton title="Save" onPress={saveInput} className="mt-2" />
+      {/* Item list */}
+      <FlatList
+        data={items}
+        renderItem={({ item }) => <InvoiceCard>{item.text}</InvoiceCard>}
+        className="px-5 mt-5"
+        keyboardShouldPersistTaps="handled"
+        contentContainerStyle={{
+          paddingBottom: 100,
+        }}
+      />
     </SafeAreaView>
   );
 };
 
-export default Rides;
+export default Expenses;

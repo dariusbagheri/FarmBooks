@@ -11,8 +11,8 @@ import {
   UserProvider,
   useAuth,
 } from "@realm/react";
-import { Item } from "@/models/invoice";
-import { Pressable, View, Text } from "react-native";
+import { Invoice, Item, LineItem } from "@/models/invoice";
+import { TouchableOpacity, View, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY!;
@@ -52,7 +52,7 @@ export default function RootLayout() {
       <ClerkLoaded>
         <AppProvider id="fb_sync_service-acgyahn">
           <UserProvider fallback={LogIn}>
-            <RealmProvider schema={[Item]}>
+            <RealmProvider schema={[Item, LineItem, Invoice]}>
               <Stack>
                 <Stack.Screen name="index" options={{ headerShown: false }} />
                 <Stack.Screen name="(auth)" options={{ headerShown: false }} />
@@ -72,9 +72,9 @@ const LogIn = () => {
   const { logInWithAnonymous, result } = useAuth();
   return (
     <SafeAreaView>
-      <Pressable onPress={logInWithAnonymous}>
+      <TouchableOpacity onPress={logInWithAnonymous}>
         <Text>Log In</Text>
-      </Pressable>
+      </TouchableOpacity>
       {result.error && <Text>{result.error.message}</Text>}
     </SafeAreaView>
   );

@@ -1,6 +1,6 @@
+import React from "react";
 import { router } from "expo-router";
-import React, { useEffect, useState } from "react";
-import { View, Text, Image, TouchableOpacity, Keyboard } from "react-native";
+import { View, Text, Image, TouchableOpacity } from "react-native";
 
 import { Farm } from "@/types/type";
 import { icons } from "@/constants";
